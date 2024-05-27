@@ -119,14 +119,14 @@ async function sendEmail(payload) {
     port: 587, // Replace with your SMTP port
     secure: false, // true for 465, false for other ports
     auth: {
-      user: 'process.env.EMAIL_USER', // Replace with your email username
-      pass: 'process.env.EMAIL_PASS', // Replace with your email password
+      user: process.env.EMAIL_USER, // Replace with your email username
+      pass: process.env.EMAIL_PASS, // Replace with your email password
     },
   });
 
   const mailOptions = {
-    from: 'process.env.EMAIL_FROM', // Replace with your email address
-    to: 'process.env.EMAIL_TO', // Replace with recipient email address
+    from: process.env.EMAIL_FROM, // Replace with your email address
+    to: process.env.EMAIL_TO, // Replace with recipient email address
     subject: `Webhook Payload: ${payload.title}`,
     text: JSON.stringify(payload, null, 2),
   };
