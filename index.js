@@ -56,8 +56,8 @@ async function sendEmail(payload) {
   const mailOptions = {
     from: process.env.EMAIL_FROM, // Replace with your email address
     to: process.env.EMAIL_TO, // Replace with recipient email address
-    subject: `Webhook Payload: ${payload.title}`,
-    text: JSON.stringify(payload, null, 2),
+    subject: payload.title,
+    text: payload.message,
   };
 
   await transporter.sendMail(mailOptions);
