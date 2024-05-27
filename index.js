@@ -63,7 +63,7 @@ async function sendEmail(payload) {
   await transporter.sendMail(mailOptions);
   console.log('Email sent successfully');
 }
-
+ 
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
