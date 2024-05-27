@@ -55,7 +55,7 @@ async function sendEmail(payload) {
 
   const mailOptions = {
     from: process.env.EMAIL_FROM, // Replace with your email address
-    to: process.env.EMAIL_TO, // Replace with recipient email address
+    to: [process.env.EMAIL_TO, process.env.EMAIL_TO_1], // Replace with recipient email address
     subject: payload.title,
     text: payload.message,
   };
