@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 const app = express();
-const port = 3000; // Change to your desired port number
+const port = 4000; // Change to your desired port number
 
 // Middleware to parse JSON bodies
 app.use(express.json());
