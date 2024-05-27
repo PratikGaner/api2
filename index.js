@@ -115,16 +115,18 @@ async function createWorkItem(workItemData) {
 // Function to send an email
 async function sendEmail(payload) {
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com', // Replace with your SMTP host
+    port: 587, // Replace with your SMTP port
+    secure: false, // true for 465, false for other ports
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
+      user: 'process.env.EMAIL_USER', // Replace with your email username
+      pass: 'process.env.EMAIL_PASS', // Replace with your email password
     },
   });
 
   const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to: process.env.EMAIL_TO,
+    from: 'process.env.EMAIL_FROM', // Replace with your email address
+    to: 'process.env.EMAIL_TO', // Replace with recipient email address
     subject: `Webhook Payload: ${payload.title}`,
     text: JSON.stringify(payload, null, 2),
   };
