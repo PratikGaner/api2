@@ -13,7 +13,7 @@ app.use(express.json());
 // GET endpoint for testing
 app.get('/webhook', async (req, res) => {
   console.log('GET request received');
-  res.status(200).send("GET Reached");
+  res.status(200).send("GET Reached");   
 });
 
 // POST endpoint to handle webhook
