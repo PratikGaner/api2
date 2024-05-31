@@ -44,7 +44,7 @@ app.post('/webhook', async (req, res) => {
 // Function to send an email
 async function sendEmail(payload) {
   const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com', // Replace with your SMTP host
+    host: 'smtp.office365.com', // Replace with your SMTP host
     port: 587, // Replace with your SMTP port
     secure: false, // true for 465, false for other ports
     auth: {
