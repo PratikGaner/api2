@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const nodemailer = require('nodemailer');
+ 
 require('dotenv').config();
 
 const app = express();
@@ -12,7 +13,7 @@ app.use(express.json());
 // GET endpoint for testing
 app.get('/webhook', async (req, res) => {
   console.log('GET request received');
-  res.status(200).send("GET Reached");
+  res.status(200).send("GET Reached");   
 });
 
 // POST endpoint to handle webhook
@@ -23,25 +24,14 @@ app.post('/webhook', async (req, res) => {
     const payload = req.body;
     console.log('Request Payload:', payload);
 
-    // Extract the message part
-    const message = payload.message;
-    const lines = message.split('\n');
-    const resolvedMessage = lines.slice(0, lines.indexOf('Annotations:')).join('\n');
-
-    // Construct the payload with the extracted message
-    const extractedPayload = {
-      title: payload.title || 'Alert Notification',
-      message: resolvedMessage
-    };
-
-    // Validate the extracted payload
-    if (!extractedPayload.message) {
-      console.log('Invalid payload:', extractedPayload);
+    // Validate payload
+    if (!payload.title || !payload.message) {
+      console.log('Invalid payload:', payload);
       return res.status(400).send('Invalid payload');
     }
 
-    // Send an email with the extracted payload
-    await sendEmail(extractedPayload);
+    // Send an email with the payload
+    await sendEmail(payload);
 
     // Respond to the client
     res.status(200).send('Email sent successfully');
@@ -65,7 +55,7 @@ async function sendEmail(payload) {
 
   const mailOptions = {
     from: process.env.EMAIL_FROM, // Replace with your email address
-    to: [process.env.EMAIL_TO, process.env.EMAIL_TO_1, process.env.EMAIL_TO_2], // Replace with recipient email addresses
+    to: [process.env.EMAIL_TO, process.env.EMAIL_TO_1,process.env.EMAIL_TO_2], // Replace with recipient email address
     subject: payload.title,
     text: payload.message,
   };
@@ -73,8 +63,10 @@ async function sendEmail(payload) {
   await transporter.sendMail(mailOptions);
   console.log('Email sent successfully');
 }
-
+ 
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+ 
+  do this in this code
